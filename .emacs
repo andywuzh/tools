@@ -925,3 +925,9 @@ Completion is available."))
 
 ;; nxhtml mode for web developing
 ;; (load "~/.config/emacs/nxhtml/autostart.el")
+
+;; 插入时间
+(defun insert-current-time()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %H:%M:%S" (time-add (current-time) (seconds-to-time (* 60 60 16))))))
+(global-set-key [(f11)] 'insert-current-time)
