@@ -1,0 +1,17 @@
+K 8
+passtype
+V 6
+simple
+K 8
+password
+V 4
+andy
+K 15
+svn:realmstring
+V 62
+<svn://192.168.1.51:3690> 1a4d31b1-e8ce-4a75-8a58-88e7aac647b9
+K 8
+username
+V 4
+andy
+END
