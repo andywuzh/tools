@@ -334,7 +334,8 @@
   (interactive)
   (make-local-variable 'skeleton-pair-alist)
   (setq skeleton-pair-alist  '(
-    (?` _ "'")
+    (?` _ "`")
+    (?' _ "'")
     (?\( _ ")")
     (?\[ _ "]")
     (?\< _ ">")
@@ -343,11 +344,13 @@
   (local-set-key (kbd "(") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "{") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "`") 'skeleton-pair-insert-maybe)
+  (local-set-key (kbd "'") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "[") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "<") 'skeleton-pair-insert-maybe))
 (add-hook 'c-mode-hook 'my-c-mode-auto-pair)
 (add-hook 'c++-mode-hook 'my-c-mode-auto-pair)
 (add-hook 'php-mode-hook 'my-c-mode-auto-pair)
+(add-hook 'css-mode-hook 'my-c-mode-auto-pair)
 ;(add-hook 'html-mode-hook 'my-c-mode-auto-pair)
 (add-hook 'java-mode-hook 'my-c-mode-auto-pair)
 (add-hook 'javascript-mode-hook 'my-c-mode-auto-pair)
@@ -809,7 +812,7 @@ Completion is available."))
       (end-of-buffer)
       (switch-to-buffer-other-window buf))))
 
-(global-set-key [f8] 'my-eshell-execute-current-line)
+;(global-set-key [f8] 'my-eshell-execute-current-line)
 
 ;; execute emacs in eshell
 (defun eshell/emacs (&rest args)
@@ -931,3 +934,16 @@ Completion is available."))
   (interactive)
   (insert (format-time-string "%Y-%m-%d %H:%M:%S" (time-add (current-time) (seconds-to-time (* 60 60 16))))))
 (global-set-key [(f11)] 'insert-current-time)
+
+
+;; 注释用doxymacs
+(require 'doxymacs)
+(add-hook 'c-mode-common-hook 'doxymacs-mode)
+(add-hook 'php-mode-hook
+          (lambda()
+            (require 'doxymacs)
+            (doxymacs-mode t)
+            (local-set-key [(f8)] 'doxymacs-insert-function-comment)
+            )
+          )
+
